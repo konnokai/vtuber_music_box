@@ -1,0 +1,30 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "src/**/__tests__/*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "src/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+    },
+    "allowJs": true,
+    "target": "ES2022",
+    "strict": true,
+    "module": "ESNext", // 模組化方式
+    "moduleResolution": "Bundler", // 模組解析方式
+    "skipLibCheck": true, // 不去檢查 node_modules 底下的型別
+    "noEmit": true // 只做型別檢查不另外產生 js 檔案
+  }
+}

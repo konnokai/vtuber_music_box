@@ -8,6 +8,9 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "build-only": "vite build",
     "preview": "vite preview",
+    "test:unit": "vitest --run --reporter verbose --root src/",
+    "test:watch": "vitest --root src/",
+    "test:ui": "vitest --ui",
     "type-check": "vue-tsc --noEmit --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
@@ -26,6 +29,7 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.2",
+    "@vue/tsconfig": "^0.4.0",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.51.0",
     "eslint-plugin-vue": "^9.17.0",
