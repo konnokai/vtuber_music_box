@@ -4,6 +4,6 @@ export interface YTPlayerProps {
   width?: string | number;
   height?: string | number;
   playerVars?: PlayerVars;
-  videoId?: string;
+  videoId: string;
   cookie?: boolean;
 }

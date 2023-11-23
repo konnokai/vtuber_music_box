@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, withDefaults } from 'vue';
+import { ref, watch, withDefaults } from 'vue';
 import { usePlayer } from '@vue-youtube/core';
 import type { YTPlayerProps } from './Prop';
 
@@ -11,7 +11,6 @@ const props = withDefaults(defineProps<YTPlayerProps>(), {
     time: 0,
     mute: 0,
   }),
-  videoId: '',
   cookie: true,
 });
 
@@ -24,8 +23,7 @@ const emit = defineEmits([
   'ready',
 ]);
 
-const player = ref<HTMLDivElement | null>(null);
-const videoId = ref(props.videoId);
+const player = ref<HTMLDivElement>();
 
 const {
   instance,
@@ -37,7 +35,7 @@ const {
   onApiChange,
   onError,
   onReady,
-} = usePlayer(videoId, player, {
+} = usePlayer(props.videoId, player, {
   playerVars: props.playerVars,
   height: props.height,
   cookie: props.cookie,
@@ -67,6 +65,15 @@ onError(event => {
 onReady(event => {
   emit('ready', event);
 });
+
+watch(
+  () => props.videoId,
+  (newId, oldId) => {
+    if (newId !== oldId) {
+      instance.value?.loadVideoById(newId);
+    }
+  }
+);
 
 defineExpose({
   togglePlay,
