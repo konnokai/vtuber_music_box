@@ -1,9 +1,6 @@
 <template>
   <div class="loader">
-    <svg
-      class="circular"
-      :viewBox="`${Number(size) / 2} ${Number(size) / 2} ${size} ${size} `"
-    >
+    <svg class="circular" :viewBox="`${Number(size) / 2} ${Number(size) / 2} ${size} ${size} `">
       <circle
         class="path"
         :cx="size"
@@ -23,22 +20,22 @@ import { computed } from 'vue';
 const props = defineProps({
   color: {
     type: String,
-    default: '#ffffff'
+    default: '#ffffff',
   },
   size: {
     type: [String, Number],
-    default: 48
+    default: 48,
   },
   width: {
     type: [String, Number],
-    default: 3
-  }
+    default: 3,
+  },
 });
 
 const css_size = computed(() => `${props.size}px`);
 </script>
 
-<style>
+<style scoped>
 .loader {
   position: relative;
   margin: 0px auto;
@@ -68,7 +65,9 @@ const css_size = computed(() => `${props.size}px`);
 .path {
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  animation:
+    dash 1.5s ease-in-out infinite,
+    color 6s ease-in-out infinite;
   stroke-linecap: round;
 }
 
