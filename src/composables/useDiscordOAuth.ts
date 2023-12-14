@@ -24,6 +24,8 @@ export const useDiscordOAuth = () => {
       store.discordToken = data.value.message.token;
       store.userInfo = data.value.message.discordData;
     }
+
+    window.history.replaceState({}, '', location.href.split('?')[0]);
   };
 
   function loginWithDiscord() {
