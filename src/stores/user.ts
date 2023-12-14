@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import type { DiscordUser } from '~/types';
 
 export const useUserStore = defineStore('user-store', () => {
@@ -11,9 +11,28 @@ export const useUserStore = defineStore('user-store', () => {
     banner: '',
   });
 
-  const discordToken = ref<string>('');
+  const discordToken = ref('');
 
   const hasAuthenticated = computed(() => userInfo.value.id !== '');
+
+  loadFromSessionStorage();
+
+  watchEffect(() => {
+    sessionStorage.setItem('DD', JSON.stringify(userInfo.value));
+    sessionStorage.setItem('DT', discordToken.value);
+  });
+
+  function loadFromSessionStorage() {
+    try {
+      const data = sessionStorage.getItem('DD');
+      if (data) {
+        userInfo.value = JSON.parse(data) as DiscordUser;
+      }
+      discordToken.value = sessionStorage.getItem('DT') ?? '';
+    } catch (error) {
+      console.error('Error parsing sessionStorage data', error);
+    }
+  }
 
   return {
     userInfo,
