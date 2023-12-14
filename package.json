@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "devcss": "npx tailwindcss -i ./src/style.css -o ./dist/style.css --watch",
     "build": "run-p type-check \"build-only {@}\" --",
     "build-only": "vite build",
     "preview": "vite preview",
@@ -41,7 +42,7 @@
     "postcss": "^8.4.31",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.7",
-    "tailwindcss": "^3.3.5",
+    "tailwindcss": "^3.3.6",
     "typescript": "^5.2.2",
     "unplugin-icons": "^0.17.4",
     "unplugin-vue-components": "^0.25.2",
