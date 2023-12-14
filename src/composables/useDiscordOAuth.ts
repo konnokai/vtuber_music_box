@@ -16,9 +16,9 @@ export const useDiscordOAuth = () => {
     const discordCode = currentUrl.searchParams.get('code');
     if (!discordCode) return;
 
-    const { data } = await useFetch<GetDiscordTokenResponse>(
+    const { data } = await useFetch(
       `${API_URL}/Discord/GetToken?code=${discordCode}`
-    );
+    ).json<GetDiscordTokenResponse>();
 
     if (data.value) {
       store.discordToken = data.value.message.token;

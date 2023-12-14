@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
 import { useDiscordOAuth } from '~/composables/useDiscordOAuth';
+import { useUserStore } from '~/stores/user';
+import { storeToRefs } from 'pinia';
 
 const { fetchDiscordToken, loginWithDiscord } = useDiscordOAuth();
 
 fetchDiscordToken();
+
+const store = useUserStore();
+const { userInfo, hasAuthenticated } = storeToRefs(store);
 
 function addSong() {
   console.debug('Add Song');
@@ -30,9 +35,16 @@ function addSong() {
         <a href="https://github.com/konnokai/vtuber_music_box" target="_blank" rel="noopener noreferrer">
           <i-mdi-github class="cursor-pointer" />
         </a>
-        <a href="javascript:;">
+        <a href="javascript:;" v-if="!hasAuthenticated">
           <i-mdi-discord class="cursor-pointer" @click="loginWithDiscord" />
         </a>
+        <div class="h-9 w-9 overflow-hidden rounded-full" v-else>
+          <img
+            class="object-cover"
+            :src="`https://cdn.discordapp.com/avatars/${userInfo.id}/${userInfo.avatar}?size=96`"
+            alt="user avatar"
+          />
+        </div>
       </div>
     </div>
   </header>
