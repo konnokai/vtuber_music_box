@@ -35,7 +35,7 @@ const {
   onApiChange,
   onError,
   onReady,
-} = usePlayer(props.videoId, player, {
+} = usePlayer(props.track.videoId, player, {
   playerVars: props.playerVars,
   height: props.height,
   cookie: props.cookie,
@@ -67,10 +67,14 @@ onReady(event => {
 });
 
 watch(
-  () => props.videoId,
+  () => props.track.guid,
   (newId, oldId) => {
     if (newId !== oldId) {
-      instance.value?.loadVideoById(newId);
+      instance.value?.loadVideoById({
+        videoId: props.track.videoId,
+        startSeconds: props.track.startAt,
+        endSeconds: props.track.endAt,
+      });
     }
   }
 );

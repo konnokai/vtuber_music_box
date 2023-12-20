@@ -4,6 +4,14 @@ export interface YTPlayerProps {
   width?: string | number;
   height?: string | number;
   playerVars?: PlayerVars;
-  videoId: string;
+  track: TrackProps;
   cookie?: boolean;
+}
+
+export interface TrackProps {
+  guid: string;
+  videoTitle: string;
+  videoId: string;
+  startAt: number;
+  endAt: number;
 }

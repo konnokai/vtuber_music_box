@@ -8,11 +8,8 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppHeader: typeof import('./src/components/AppHeader.vue')['default']
-    Async: typeof import('./src/components/Async.vue')['default']
     IMdiDiscord: typeof import('~icons/mdi/discord')['default']
     IMdiGithub: typeof import('~icons/mdi/github')['default']
-    IMdiYoutube: typeof import('~icons/mdi/youtube')['default']
-    ProgresserCircular: typeof import('./src/components/ProgresserCircular.vue')['default']
     YoutubePlayer: typeof import('./src/components/YTPlayer/YoutubePlayer.vue')['default']
   }
 }
